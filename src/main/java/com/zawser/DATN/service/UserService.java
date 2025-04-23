@@ -2,6 +2,8 @@ package com.zawser.DATN.service;
 
 import com.zawser.DATN.dto.request.UserUpdateRequest;
 import com.zawser.DATN.entity.User;
+import com.zawser.DATN.exception.AppException;
+import com.zawser.DATN.exception.ErrorCode;
 import com.zawser.DATN.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class UserService {
         User user = new User();
 
         if(userRepository.existsByUsername(request.getUsername())){
-            throw new RuntimeException("Username already exists");
+            throw new AppException(ErrorCode.USER_EXISTED);
         }
 
         user.setUsername(request.getUsername());

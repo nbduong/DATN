@@ -1,6 +1,7 @@
 package com.zawser.DATN.controller;
 
 
+import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.UserCreationRequest;
 import com.zawser.DATN.dto.request.UserUpdateRequest;
 import com.zawser.DATN.entity.User;
@@ -18,8 +19,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody @Valid UserCreationRequest request){
-        return userService.createUser(request);
+    ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request){
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(request));
+        return apiResponse;
     }
 
     @GetMapping
