@@ -7,6 +7,7 @@ public enum ErrorCode {
     INVALID_PASSWORD(1003, "Password must be at least 8 characters long"),
     INVALID_KEY_EXCEPTION(1004, "Invalid key"),
     USER_NOT_FOUND(1005, "User not found"),
+    UNAITHENTICATED_EXCEPTION(1006, "Unauthenticated Error"),
 
     ;
 

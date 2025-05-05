@@ -1,8 +1,11 @@
 package com.zawser.DATN.controller;
 
+import com.nimbusds.jose.JOSEException;
 import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.AuthenticationRequest;
+import com.zawser.DATN.dto.request.IntrospectRequest;
 import com.zawser.DATN.dto.response.AuthenticationResponse;
+import com.zawser.DATN.dto.response.IntrospectResponse;
 import com.zawser.DATN.entity.User;
 import com.zawser.DATN.service.AuthenticationService;
 import lombok.AccessLevel;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -21,14 +26,19 @@ public class AuthenticationController {
     AuthenticationService authenticationService;
 
 
-    @PostMapping("/login")
+    @PostMapping("/token")
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        boolean result = authenticationService.authenticate(request);
+        var result = authenticationService.authenticate(request);
         return ApiResponse.<AuthenticationResponse>builder()
-                .result(AuthenticationResponse.builder()
-                        .authenticated(result)
-                        .build())
+                .result(result)
                 .build();
     }
 
+    @PostMapping("/introspect")
+    ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request) throws ParseException, JOSEException {
+        var result = authenticationService.introspect(request);
+        return ApiResponse.<IntrospectResponse>builder()
+                .result(result)
+                .build();
+    }
 }
