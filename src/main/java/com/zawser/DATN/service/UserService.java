@@ -47,7 +47,7 @@ public class UserService {
 //        Set role cho user moi
         HashSet<String> roles = new HashSet<>();
         roles.add(Role.USER.name());
-        user.setRoles(roles);
+//        user.setRoles(roles);
 
 
         user.setCreated_at(LocalDate.now());

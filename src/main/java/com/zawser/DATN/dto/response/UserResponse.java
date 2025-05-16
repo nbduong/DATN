@@ -1,5 +1,6 @@
 package com.zawser.DATN.dto.response;
 
+import com.zawser.DATN.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -22,7 +23,7 @@ public class UserResponse {
      String avatar;
      String gender;
      LocalDate dob;
-     Set<String> roles;
+     Set<Role> roles;
 
      String created_by;
      String updated_by;
