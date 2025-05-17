@@ -5,15 +5,12 @@ import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.UserCreationRequest;
 import com.zawser.DATN.dto.request.UserUpdateRequest;
 import com.zawser.DATN.dto.response.UserResponse;
-import com.zawser.DATN.entity.User;
-import com.zawser.DATN.mapper.UserMapper;
 import com.zawser.DATN.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
