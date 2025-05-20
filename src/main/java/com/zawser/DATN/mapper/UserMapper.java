@@ -1,6 +1,5 @@
 package com.zawser.DATN.mapper;
 
-
 import com.zawser.DATN.dto.request.UserCreationRequest;
 import com.zawser.DATN.dto.request.UserUpdateRequest;
 import com.zawser.DATN.dto.response.UserResponse;
@@ -13,9 +12,8 @@ import org.mapstruct.MappingTarget;
 public interface UserMapper {
     User toUser(UserCreationRequest request);
 
-
     UserResponse toUserResponse(User user);
 
-    @Mapping(target = "roles",ignore = true)
+    @Mapping(target = "roles", ignore = true)
     void updateUser(@MappingTarget User user, UserUpdateRequest request);
 }

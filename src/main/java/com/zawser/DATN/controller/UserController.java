@@ -1,5 +1,6 @@
 package com.zawser.DATN.controller;
 
+import java.util.List;
 
 import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.UserCreationRequest;
@@ -14,8 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/users")
@@ -23,10 +22,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
 
-
-   UserService userService;
-
-
+    UserService userService;
 
     @PostMapping
     ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request) {
@@ -53,7 +49,6 @@ public class UserController {
                 .result(userService.getUser(userId))
                 .build();
     }
-
 
     @GetMapping("/myInfo")
     ApiResponse<UserResponse> getMyInfo() {

@@ -1,10 +1,8 @@
 package com.zawser.DATN.repository;
 
-import com.zawser.DATN.entity.Permission;
 import com.zawser.DATN.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, String> {
-}
+public interface RoleRepository extends JpaRepository<Role, String> {}

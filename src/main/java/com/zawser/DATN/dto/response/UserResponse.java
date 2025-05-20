@@ -1,11 +1,10 @@
 package com.zawser.DATN.dto.response;
 
-import com.zawser.DATN.entity.Role;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.time.LocalDate;
 import java.util.Set;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
@@ -13,23 +12,22 @@ import java.util.Set;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserResponse {
-     String account_id;
-     String username;
-     String email;
-     String requestcode;
-     String name;
-     String phone;
-     String address;
-     String avatar;
-     String gender;
-     LocalDate dob;
+    String account_id;
+    String username;
+    String email;
+    String requestcode;
+    String name;
+    String phone;
+    String address;
+    String avatar;
+    String gender;
+    LocalDate dob;
 
+    Set<RoleResponse> roles;
 
-     Set<RoleResponse> roles;
-
-     String created_by;
-     String updated_by;
-     LocalDate created_at;
-     LocalDate updated_at;
-     String status;
+    String created_by;
+    String updated_by;
+    LocalDate created_at;
+    LocalDate updated_at;
+    String status;
 }

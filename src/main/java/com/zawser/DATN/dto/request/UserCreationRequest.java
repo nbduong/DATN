@@ -1,14 +1,12 @@
 package com.zawser.DATN.dto.request;
 
+import java.time.LocalDate;
+
 import com.zawser.DATN.validator.DobContraints;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDate;
-import java.util.Set;
-
 
 @Data
 @NoArgsConstructor
@@ -30,6 +28,7 @@ public class UserCreationRequest {
 
     @DobContraints(min = 18, message = "INVALID_DOB")
     LocalDate dob;
+
     String phone;
     String address;
     String gender;

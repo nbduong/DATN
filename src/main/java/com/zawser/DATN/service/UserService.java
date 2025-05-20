@@ -1,8 +1,11 @@
 package com.zawser.DATN.service;
 
-import com.nimbusds.jose.proc.SecurityContext;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+
+import com.zawser.DATN.dto.request.UserCreationRequest;
 import com.zawser.DATN.dto.request.UserUpdateRequest;
-import com.zawser.DATN.dto.response.RoleResponse;
 import com.zawser.DATN.dto.response.UserResponse;
 import com.zawser.DATN.entity.User;
 import com.zawser.DATN.enums.Role;
@@ -21,13 +24,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.zawser.DATN.dto.request.UserCreationRequest;
-
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -41,14 +37,13 @@ public class UserService {
     RoleRepository roleRepository;
 
     //      Tạo user mới
-    public UserResponse createUser(UserCreationRequest request){
+    public UserResponse createUser(UserCreationRequest request) {
 
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-//        Set role cho user moi
+        //        Set role cho user moi
         user.setRoles(new HashSet<>(roleRepository.findAllById(List.of(Role.USER.name()))));
-
 
         user.setCreated_at(LocalDate.now());
         user.setUpdated_at(LocalDate.now());
@@ -63,47 +58,34 @@ public class UserService {
         return userMapper.toUserResponse(user);
     }
 
-
     //    Lấy tất cả user
 
-//    @PreAuthorize("hasAuthority('CREATE_DATA')")
+    //    @PreAuthorize("hasAuthority('CREATE_DATA')")
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
         log.info("Getting users");
-        return userRepository
-                .findAll()
-                .stream()
-                .map(userMapper::toUserResponse).toList();
+        return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
     }
     //    Lấy 1 user theo id
     @PostAuthorize("returnObject.username == authentication.name or hasRole('ADMIN')")
-    public UserResponse getUser(String account_id){
-        return userMapper
-                .toUserResponse(userRepository
-                        .findById(account_id)
-                        .orElseThrow(() -> new RuntimeException("User not found")));
+    public UserResponse getUser(String account_id) {
+        return userMapper.toUserResponse(
+                userRepository.findById(account_id).orElseThrow(() -> new RuntimeException("User not found")));
     }
 
-
-//    Lay thong tin
-    public UserResponse getMyInfo(){
+    //    Lay thong tin
+    public UserResponse getMyInfo() {
         var context = SecurityContextHolder.getContext();
-        String Name =  context
-                .getAuthentication()
-                .getName();
+        String Name = context.getAuthentication().getName();
 
-        User user = userRepository.findByUsername(Name)
-                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findByUsername(Name).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         return userMapper.toUserResponse(user);
     }
 
     //    Sửa user
-    public UserResponse updateUser(String account_id, UserUpdateRequest request){
-        User user = userRepository
-                .findById(account_id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public UserResponse updateUser(String account_id, UserUpdateRequest request) {
+        User user = userRepository.findById(account_id).orElseThrow(() -> new RuntimeException("User not found"));
         userMapper.updateUser(user, request);
-
 
         var roles = roleRepository.findAllById(request.getRoles());
         user.setRoles(new HashSet<>(roles));
@@ -114,9 +96,8 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
     //    Xóa user
-    public void deleteUser(String account_id){
+    public void deleteUser(String account_id) {
 
         userRepository.deleteById(account_id);
     }
-
 }

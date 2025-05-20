@@ -1,7 +1,5 @@
 package com.zawser.DATN.dto.request;
 
-import java.util.Set;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,9 +8,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoleRequest {
-
-    String name;
-    String description;
-    Set<String> permissions;
+public class RefreshRequest {
+    String token;
 }

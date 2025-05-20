@@ -1,5 +1,7 @@
 package com.zawser.DATN.controller;
 
+import java.util.List;
+
 import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.RoleRequest;
 import com.zawser.DATN.dto.response.RoleResponse;
@@ -11,8 +13,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/roles")
@@ -20,17 +20,15 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RoleController {
 
-
     PermissionService permissionService;
     RoleService roleService;
 
     @PostMapping
-    ApiResponse<RoleResponse> create(@RequestBody RoleRequest request ) {
+    ApiResponse<RoleResponse> create(@RequestBody RoleRequest request) {
         return ApiResponse.<RoleResponse>builder()
                 .result(roleService.create(request))
                 .build();
     }
-
 
     @GetMapping
     ApiResponse<List<RoleResponse>> getAll() {
@@ -39,11 +37,9 @@ public class RoleController {
                 .build();
     }
 
-
     @DeleteMapping("/{role}")
     ApiResponse<Void> delete(@PathVariable String role) {
         roleService.delete(role);
-        return ApiResponse.<Void>builder()
-                .build();
+        return ApiResponse.<Void>builder().build();
     }
 }

@@ -26,6 +26,4 @@ public enum ErrorCode {
     private int code = 1905;
     private String message;
     private HttpStatusCode statusCode;
-
-
 }

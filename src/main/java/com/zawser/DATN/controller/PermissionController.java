@@ -1,5 +1,7 @@
 package com.zawser.DATN.controller;
 
+import java.util.List;
+
 import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.PermissionRequest;
 import com.zawser.DATN.dto.response.PermissionResponse;
@@ -10,8 +12,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/permissions")
@@ -19,16 +19,14 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PermissionController {
 
-
     PermissionService permissionService;
 
     @PostMapping
-    ApiResponse<PermissionResponse> create(@RequestBody PermissionRequest request ) {
+    ApiResponse<PermissionResponse> create(@RequestBody PermissionRequest request) {
         return ApiResponse.<PermissionResponse>builder()
                 .result(permissionService.create(request))
                 .build();
     }
-
 
     @GetMapping
     ApiResponse<List<PermissionResponse>> getAll() {
@@ -37,11 +35,9 @@ public class PermissionController {
                 .build();
     }
 
-
     @DeleteMapping("/{permission}")
     ApiResponse<Void> delete(@PathVariable String permission) {
         permissionService.delete(permission);
-        return ApiResponse.<Void>builder()
-                .build();
+        return ApiResponse.<Void>builder().build();
     }
 }
