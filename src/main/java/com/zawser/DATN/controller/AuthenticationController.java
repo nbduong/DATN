@@ -4,6 +4,7 @@ import com.nimbusds.jose.JOSEException;
 import com.zawser.DATN.dto.request.ApiResponse;
 import com.zawser.DATN.dto.request.AuthenticationRequest;
 import com.zawser.DATN.dto.request.IntrospectRequest;
+import com.zawser.DATN.dto.request.LogoutRequest;
 import com.zawser.DATN.dto.response.AuthenticationResponse;
 import com.zawser.DATN.dto.response.IntrospectResponse;
 import com.zawser.DATN.entity.User;
@@ -34,8 +35,17 @@ public class AuthenticationController {
                 .build();
     }
 
+    @PostMapping("/logout")
+    ApiResponse<Void> logout(@RequestBody LogoutRequest request)
+            throws ParseException, JOSEException {
+        authenticationService.logout(request);
+        return ApiResponse.<Void>builder()
+                .build();
+    }
+
     @PostMapping("/introspect")
-    ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request) throws ParseException, JOSEException {
+    ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request)
+            throws ParseException, JOSEException {
         var result = authenticationService.introspect(request);
         return ApiResponse.<IntrospectResponse>builder()
                 .result(result)

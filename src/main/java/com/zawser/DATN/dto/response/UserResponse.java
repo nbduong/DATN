@@ -23,7 +23,9 @@ public class UserResponse {
      String avatar;
      String gender;
      LocalDate dob;
-     Set<Role> roles;
+
+
+     Set<RoleResponse> roles;
 
      String created_by;
      String updated_by;

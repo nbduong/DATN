@@ -2,12 +2,14 @@ package com.zawser.DATN.service;
 
 import com.nimbusds.jose.proc.SecurityContext;
 import com.zawser.DATN.dto.request.UserUpdateRequest;
+import com.zawser.DATN.dto.response.RoleResponse;
 import com.zawser.DATN.dto.response.UserResponse;
 import com.zawser.DATN.entity.User;
 import com.zawser.DATN.enums.Role;
 import com.zawser.DATN.exception.AppException;
 import com.zawser.DATN.exception.ErrorCode;
 import com.zawser.DATN.mapper.UserMapper;
+import com.zawser.DATN.repository.RoleRepository;
 import com.zawser.DATN.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +38,7 @@ public class UserService {
     UserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
-
+    RoleRepository roleRepository;
 
     //      Tạo user mới
     public UserResponse createUser(UserCreationRequest request){
@@ -45,9 +47,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
 //        Set role cho user moi
-        HashSet<String> roles = new HashSet<>();
-        roles.add(Role.USER.name());
-//        user.setRoles(roles);
+        user.setRoles(new HashSet<>(roleRepository.findAllById(List.of(Role.USER.name()))));
 
 
         user.setCreated_at(LocalDate.now());
@@ -65,6 +65,8 @@ public class UserService {
 
 
     //    Lấy tất cả user
+
+//    @PreAuthorize("hasAuthority('CREATE_DATA')")
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
         log.info("Getting users");
@@ -102,6 +104,9 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         userMapper.updateUser(user, request);
 
+
+        var roles = roleRepository.findAllById(request.getRoles());
+        user.setRoles(new HashSet<>(roles));
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setUpdated_at(LocalDate.now());
         user.setUpdated_by(user.getUsername());

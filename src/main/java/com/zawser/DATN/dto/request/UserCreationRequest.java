@@ -1,5 +1,6 @@
 package com.zawser.DATN.dto.request;
 
+import com.zawser.DATN.validator.DobContraints;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -26,6 +27,8 @@ public class UserCreationRequest {
     String email;
 
     String name;
+
+    @DobContraints(min = 18, message = "INVALID_DOB")
     LocalDate dob;
     String phone;
     String address;
