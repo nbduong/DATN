@@ -72,11 +72,7 @@ public class AuthenticationService {
         }
         var token = generateToken(user);
 
-        return AuthenticationResponse
-                .builder()
-                .token(token)
-                .authenticated(true)
-                .build();
+        return AuthenticationResponse.builder().token(token).authenticated(true).build();
     }
 
     public IntrospectResponse introspect(IntrospectRequest request) throws ParseException, JOSEException {
@@ -150,7 +146,8 @@ public class AuthenticationService {
 
             String username = signToken.getJWTClaimsSet().getSubject();
 
-            User user = userRepository.findByUsername(username)
+            User user = userRepository
+                    .findByUsername(username)
                     .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
             user.setStatus("0");
@@ -158,11 +155,7 @@ public class AuthenticationService {
             userRepository.save(user);
 
             InvalidatedToken invalidatedToken =
-                    InvalidatedToken
-                            .builder()
-                            .id(jit)
-                            .expiryTime(expiryTime)
-                            .build();
+                    InvalidatedToken.builder().id(jit).expiryTime(expiryTime).build();
 
             invalidatedTokenRepository.save(invalidatedToken);
         } catch (AppException e) {
@@ -195,20 +188,12 @@ public class AuthenticationService {
     public AuthenticationResponse refreshToken(RefreshRequest request) throws ParseException, JOSEException {
         var signedJWT = verifyToken(request.getToken(), false);
 
-        String jit = signedJWT
-                .getJWTClaimsSet()
-                .getJWTID();
+        String jit = signedJWT.getJWTClaimsSet().getJWTID();
 
-        Date expiryTime = signedJWT
-                .getJWTClaimsSet()
-                .getExpirationTime();
+        Date expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
 
         InvalidatedToken invalidatedToken =
-                InvalidatedToken
-                        .builder()
-                        .id(jit)
-                        .expiryTime(expiryTime)
-                        .build();
+                InvalidatedToken.builder().id(jit).expiryTime(expiryTime).build();
 
         invalidatedTokenRepository.save(invalidatedToken);
 
@@ -219,10 +204,6 @@ public class AuthenticationService {
         user.setStatus("1");
         userRepository.save(user);
         var token = generateToken(user);
-        return AuthenticationResponse
-                .builder()
-                .token(token)
-                .authenticated(true)
-                .build();
+        return AuthenticationResponse.builder().token(token).authenticated(true).build();
     }
 }

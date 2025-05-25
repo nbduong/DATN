@@ -18,8 +18,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final String[] publicEndpoints = {
-        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh"
+    private final String[] publicPostEndpoints = {
+        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
+    };
+    private final String[] publicGetEndpoints = {
+            "/category", "/products", "/products/**", "/categories/**"
     };
 
     private final CustomJwtDecoder customJwtDecoder;
@@ -30,9 +33,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(request ->
-                request.requestMatchers(HttpMethod.POST, publicEndpoints)
-                .permitAll()
+
+        httpSecurity.authorizeHttpRequests(request -> request
+                .requestMatchers(HttpMethod.GET, publicGetEndpoints).permitAll()
+                .requestMatchers(HttpMethod.POST, publicPostEndpoints).permitAll()
                 .anyRequest()
                 .authenticated());
 
@@ -60,9 +64,4 @@ public class SecurityConfig {
         jwtConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return jwtConverter;
     }
-
-
-
-
-
 }

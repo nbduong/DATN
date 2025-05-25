@@ -1,6 +1,5 @@
 package com.zawser.datn.service;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 
@@ -45,10 +44,6 @@ public class UserService {
         //        Set role cho user moi
         user.setRoles(new HashSet<>(roleRepository.findAllById(List.of(Role.USER.name()))));
 
-        user.setCreated_at(LocalDate.now());
-        user.setUpdated_at(LocalDate.now());
-        user.setCreated_by(request.getUsername());
-        user.setUpdated_by(request.getUsername());
         user.setStatus("0");
         try {
             user = userRepository.save(user);
@@ -88,17 +83,21 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         userMapper.updateUser(user, request);
 
-        var roles = roleRepository.findAllById(request.getRoles());
-        user.setRoles(new HashSet<>(roles));
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setUpdated_at(LocalDate.now());
-        user.setUpdated_by(user.getUsername());
+        if (request.getRoles() != null) {
+            var roles = roleRepository.findAllById(request.getRoles());
+            user.setRoles(new HashSet<>(roles));
+        }
+
+        if (request.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+
         user.setStatus("1");
         return userMapper.toUserResponse(userRepository.save(user));
     }
     //    Xóa user
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(String id) {
-
         userRepository.deleteById(id);
     }
 }

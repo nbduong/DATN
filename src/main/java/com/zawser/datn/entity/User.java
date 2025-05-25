@@ -7,7 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,16 +26,11 @@ public class User {
     String name;
     String phone;
     String address;
-    String avatar;
     String gender;
     LocalDate dob;
 
     @ManyToMany
     Set<Role> roles;
 
-    String created_by;
-    String updated_by;
-    LocalDate created_at;
-    LocalDate updated_at;
     String status;
 }

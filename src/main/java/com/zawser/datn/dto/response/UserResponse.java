@@ -14,19 +14,14 @@ import lombok.experimental.FieldDefaults;
 public class UserResponse {
     String id;
     String username;
+
     String email;
     String name;
     String phone;
     String address;
-    String avatar;
     String gender;
     LocalDate dob;
 
     Set<RoleResponse> roles;
-
-    String created_by;
-    String updated_by;
-    LocalDate created_at;
-    LocalDate updated_at;
     String status;
 }

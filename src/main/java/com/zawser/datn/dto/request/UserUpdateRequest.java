@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.jetbrains.annotations.Nullable;
 
 @Data
 @Builder
@@ -16,6 +17,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
 
+    @Nullable
     @Size(min = 8, message = "INVALID_PASSWORD")
     String password;
 
@@ -31,5 +33,6 @@ public class UserUpdateRequest {
     String address;
     String gender;
 
+    @Nullable
     List<String> roles;
 }

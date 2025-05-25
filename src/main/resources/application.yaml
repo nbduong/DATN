@@ -6,16 +6,30 @@ server:
 
 spring:
   datasource:
-    url: "jdbc:mysql://localhost:3306/identity_service"
+    url: "jdbc:mysql://localhost:3306/datn"
     username: root
     password: root
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+      file-size-threshold: 0B
+      location: /tmp
+  web:
+    resources:
+      static-locations: classpath:/static/
 jwt:
   signerKey: "xvHC17VnSADr6yBE3aBQy445Yc0n7NrtE4X5oTQhrvnm3aPuYalAjB4h5Facd30P"
   valid-duration: 3600 #second
   refreshable-duration: 36000 #second
+
+logging:
+  level:
+    org.springframework: DEBUG
+    com.your package: DEBUG
+
