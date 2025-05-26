@@ -1,18 +1,16 @@
 package com.zawser.datn.controller;
 
+import java.util.List;
+
 import com.zawser.datn.dto.request.ApiResponse;
 import com.zawser.datn.dto.request.CategoryRequest;
-import com.zawser.datn.dto.request.PermissionRequest;
 import com.zawser.datn.dto.response.CategoryResponse;
-import com.zawser.datn.dto.response.PermissionResponse;
 import com.zawser.datn.service.CategoryService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,7 +20,6 @@ import java.util.List;
 public class CategoryController {
 
     CategoryService categoryService;
-
 
     @PostMapping
     ApiResponse<CategoryResponse> create(@RequestBody CategoryRequest request) {
@@ -43,5 +40,4 @@ public class CategoryController {
         categoryService.deleteCategory(id);
         return ApiResponse.<Void>builder().build();
     }
-
 }

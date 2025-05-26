@@ -1,9 +1,9 @@
 package com.zawser.datn.dto.response;
 
+import java.util.List;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +17,4 @@ public class ProductResponse {
     private Double price;
     private List<CategoryResponse> categories;
     private List<String> images;
-
 }

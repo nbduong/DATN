@@ -15,10 +15,10 @@ public class AppConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedHeaders("*");
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/uploads/**")
+        registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:uploads/"); // trỏ tới thư mục uploads trong project
     }
 }

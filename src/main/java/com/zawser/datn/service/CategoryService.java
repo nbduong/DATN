@@ -1,9 +1,9 @@
 package com.zawser.datn.service;
 
+import java.util.List;
 
 import com.zawser.datn.dto.request.CategoryRequest;
 import com.zawser.datn.dto.response.CategoryResponse;
-import com.zawser.datn.dto.response.PermissionResponse;
 import com.zawser.datn.entity.Category;
 import com.zawser.datn.mapper.CategoryMapper;
 import com.zawser.datn.repository.CategoryRepository;
@@ -13,8 +13,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j

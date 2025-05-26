@@ -55,7 +55,6 @@ public class UserService {
 
     //    Lấy tất cả user
 
-    //    @PreAuthorize("hasAuthority('CREATE_DATA')")
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
         log.info("Getting users");

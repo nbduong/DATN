@@ -1,5 +1,7 @@
 package com.zawser.datn.dto.request;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -8,9 +10,6 @@ import lombok.experimental.FieldDefaults;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,16 +17,16 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductRequest {
     @NotBlank(message = "Name is required")
-     String name;
+    String name;
 
     @Nullable
-     String description;
+    String description;
 
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be positive")
-     Double price;
+    Double price;
 
-     List<Long> categories;
+    List<Long> categories;
 
-     List<MultipartFile> images;
+    List<MultipartFile> images;
 }

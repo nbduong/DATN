@@ -1,5 +1,7 @@
 package com.zawser.datn.controller;
 
+import java.io.IOException;
+import java.util.List;
 
 import com.zawser.datn.dto.request.ApiResponse;
 import com.zawser.datn.dto.request.ProductRequest;
@@ -11,9 +13,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
-
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
@@ -21,6 +20,8 @@ import java.util.List;
 public class ProductController {
 
     ProductService productService;
+
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<ProductResponse> createProduct(@ModelAttribute ProductRequest request) throws IOException {
         return ApiResponse.<ProductResponse>builder()
@@ -39,10 +40,18 @@ public class ProductController {
     public ProductResponse getProduct(@PathVariable Long id) {
         return productService.getProductById(id);
     }
+
+
+    @PutMapping(path = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    ApiResponse<ProductResponse> updateProduct(@PathVariable Long id, @ModelAttribute ProductRequest request) throws IOException {
+        return ApiResponse.<ProductResponse>builder()
+                .result(productService.updateProduct(id, request))
+                .build();
+    }
+
     @DeleteMapping("/{id}")
     ApiResponse<Void> delete(@PathVariable Long id) throws IOException {
         productService.deleteProduct(id);
         return ApiResponse.<Void>builder().build();
     }
-
 }

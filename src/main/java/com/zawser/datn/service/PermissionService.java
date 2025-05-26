@@ -31,13 +31,13 @@ public class PermissionService {
 
         return permissionMapper.toPermissionResponse(permission);
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     public List<PermissionResponse> getAll() {
         return permissionRepository.findAll().stream()
                 .map(permissionMapper::toPermissionResponse)
                 .toList();
     }
-
 
     @PreAuthorize("hasRole('ADMIN')")
     public void delete(String permission) {
