@@ -19,10 +19,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final String[] publicPostEndpoints = {
-        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
+        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh", "/orders/**",
     };
     private final String[] publicGetEndpoints = {
-        "/category", "/products", "/products/**", "/uploads/**", "/brand/**"
+        "/category", "/products", "/products/**", "/uploads/**", "/brand/**", "/orders/**",
     };
 
     private final CustomJwtDecoder customJwtDecoder;

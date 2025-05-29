@@ -34,6 +34,7 @@ public class CategoryController {
                 .result(categoryService.getAllCategory())
                 .build();
     }
+
     @PutMapping(path = "/{id}")
     ApiResponse<CategoryResponse> update(@PathVariable Long id, @RequestBody CategoryRequest request) {
         return ApiResponse.<CategoryResponse>builder()

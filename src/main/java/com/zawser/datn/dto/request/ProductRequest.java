@@ -47,5 +47,4 @@ public class ProductRequest {
 
     @Nullable
     Long viewCount;
-
 }

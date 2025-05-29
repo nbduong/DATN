@@ -1,0 +1,17 @@
+package com.zawser.datn.dto.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class OrderItemResponse {
+    private Long id;
+    private Long productId;
+    private String productName;
+    private Integer quantity;
+    private Double price;
+}

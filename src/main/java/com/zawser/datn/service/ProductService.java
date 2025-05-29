@@ -130,12 +130,14 @@ public class ProductService {
         log.info("Updating product fields for id: {}", id);
         productMapper.updateProduct(product, request);
 
-        Category category = categoryRepository.findById(request.getCategoryId())
+        Category category = categoryRepository
+                .findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category with ID " + request.getCategoryId() + " not found"));
         product.setCategory(category);
 
         // Lấy thực thể Brand từ repository
-        Brand brand = brandRepository.findById(request.getBrandId())
+        Brand brand = brandRepository
+                .findById(request.getBrandId())
                 .orElseThrow(() -> new RuntimeException("Brand with ID " + request.getBrandId() + " not found"));
         product.setBrand(brand);
 
