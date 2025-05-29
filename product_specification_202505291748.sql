@@ -1,0 +1,88 @@
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Socket','AM5',6),
+	 ('Số nhân','16',6),
+	 ('Số luồng','32',6),
+	 ('Tốc độ cơ bản','4.5GHz Upto 5.7GHz',6),
+	 ('Cache','1MB (L1) + 16MB (L2) +64MB (L3)',6),
+	 ('Hỗ trợ bộ nhớ','DDR5 5200 MHz / 3600 MHz',6),
+	 ('Phiên bản PCI Express','PCIe 5.0',6),
+	 ('TDP','170W',6),
+	 ('Tiến trình sản xuất','TSMC 5nm',6),
+	 ('Socket','AM5',7);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Số nhân','12',7),
+	 ('Số luồng','24',7),
+	 ('Tốc độ cơ bản','4.7GHz Upto 5.6GHz',7),
+	 ('Cache','768KB (L1) + 12MB (L2) +64MB (L3)',7),
+	 ('Hỗ trợ bộ nhớ','DDR5 5200 MHz /3600 MHz',7),
+	 ('Phiên bản PCI Express','PCIe 5.0',7),
+	 ('TDP','170W',7),
+	 ('Tiến trình sản xuất','TSMC 5nm',7),
+	 ('Socket','FCLGA1700',8),
+	 ('Tốc độ cơ bản','3.2 GHz upto 6.2 GHz',8);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Cache','36 MB',8),
+	 ('Nhân CPU','24 Nhân',8),
+	 ('Luồng CPU','32 Luồng',8),
+	 ('Bộ nhớ hỗ trợ','Tối đa 192 GB',8),
+	 ('Số Kênh Bộ Nhớ Tối Đa','2',8),
+	 ('Điện áp tiêu thụ tối đa','253 W',8),
+	 ('Đồ họa bộ xử lý','Đồ họa UHD Intel® 770',8),
+	 ('Tần số động tối đa đồ họa','1.65 GHz',8),
+	 ('Lõi bộ xử lý (P+E) 17	','24 (8+16)',9),
+	 ('Luồng xử lý	','24',9);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Bộ nhớ đệm thông minh Intel® (L3, MB)	','36',9),
+	 ('Tổng bộ nhớ đệm L2 MB	','40',9),
+	 ('Tần số tăng tốc độ nhiệt Intel® (GHz)	','Lên đến 5.7',9),
+	 ('Công nghệ Intel® Turbo Boost Max 3.0 Tần số (GHz)	','0',9),
+	 ('Tần số Turbo tối đa của P-Core (GHz)	','Lên đến 5.7',9),
+	 ('Tần số Turbo tối đa của E-Core (GHz)	','Lên đến 4.6',9),
+	 ('Tần số cơ sở E-Core (GHz)	','3.2',9),
+	 ('Tần số cơ sở lõi P (GHz)	','3.7',9),
+	 ('Chuẩn Bus','PCI Express 5.0',10),
+	 ('Open GL','OpenGL®4.6',10);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Engine Clock','TBD',10),
+	 ('CUDA Core','21760',10),
+	 ('Memory Speed','28 Gbps',10),
+	 ('Bộ nhớ','512-bit',10),
+	 ('Độ phân giải',' Digital Max Resolution 7680 x 4320',10),
+	 ('Kích thước','357.6 x 149.3 x 76 mm 14.1 x 5.9 x 3 inch',10),
+	 ('Slot','3.8 Slot',10),
+	 ('Power Connectors','1 x 16-pin',10),
+	 ('Recommended PSU','1000W',10),
+	 ('Chuẩn Bus','PCI Express 5.0',11);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Open GL','OpenGL®4.6',11),
+	 ('CUDA Core','21760',11),
+	 ('Memory Speed','28 Gbps',11),
+	 ('Bộ nhớ','32GB GDDR7',11),
+	 ('Độ phân giải','7680 x 4320',11),
+	 ('Memory Clock','512-bit',11),
+	 ('Kết nối','	 Yes x 2 (Native HDMI 2.1b) Yes x 3 (Native DisplayPort 2.1a) HDCP Support Yes (2.3)',11),
+	 ('Kích thước','357.6 x 149.3 x 76 mm 14.1 x 5.9 x 3 inch',11),
+	 ('Slot','3.8 Slot',11),
+	 ('Power Connectors','1 x 16-pin',11);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Recommended PSU','1000W',11),
+	 ('Dung lượng:','64GB (2 x 32GB)',17),
+	 ('Bus:','5600MHz',17),
+	 ('Dung lượng','32GB (2x16GB)',18),
+	 ('Loại','DDR5',18),
+	 ('Bus','6000 Mhz',18),
+	 ('Dung lượng','6TB',19),
+	 ('Kết nối','SATA III',19),
+	 ('Cache','256MB',19),
+	 ('Dung lượng','8TB',21);
+INSERT INTO datn.product_specification (spec_key,spec_value,product_id) VALUES
+	 ('Kích thước','M.2 2280',21),
+	 ('Kết nối','M.2 NVMe 4x4',21),
+	 ('Tốc độ đọc(tối đa)','7300 MB/s',21),
+	 ('Tốc độ đọc','560 Mb/s',22),
+	 ('Tốc độ ghi','530 Mb/s',22),
+	 ('Dung lượng','4TB',22),
+	 ('Tổng suất tối đa','1600W',25),
+	 ('Chuẩn hiệu suất','80Plus Titanium',25),
+	 ('Chuẩn ATX','ATX 3.1',25),
+	 ('Kích thước','200 x 150 x 86 mm',25);
