@@ -32,6 +32,15 @@ public class CategoryService {
         return categoryMapper.toCategoryResponse(category);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    public CategoryResponse updateCategory(Long id, CategoryRequest request) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+        category = categoryRepository.save(category);
+        return categoryMapper.toCategoryResponse(category);
+    }
     public List<CategoryResponse> getAllCategory() {
         return categoryRepository.findAll().stream()
                 .map(categoryMapper::toCategoryResponse)

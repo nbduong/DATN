@@ -1,6 +1,7 @@
 package com.zawser.datn.dto.response;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,10 +12,16 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductResponse {
-    private Long id;
-    private String name;
-    private String description;
-    private Double price;
-    private List<CategoryResponse> categories;
-    private List<String> images;
+    Long id;
+    String name;
+    String productCode;
+    String description;
+    Double price;
+    Integer quantity;
+    String brandName;
+    String categoryName;
+    List<String> images;
+    Map<String, String> specifications;
+    String status;
+    Long viewCount;
 }

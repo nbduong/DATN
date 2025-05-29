@@ -25,7 +25,7 @@ spring:
       static-locations: classpath:/static/
 jwt:
   signerKey: "xvHC17VnSADr6yBE3aBQy445Yc0n7NrtE4X5oTQhrvnm3aPuYalAjB4h5Facd30P"
-  valid-duration: 3600 #second
+  valid-duration: 36000 #second
   refreshable-duration: 36000 #second
 
 logging:

@@ -21,7 +21,6 @@ public class ProductController {
 
     ProductService productService;
 
-
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<ProductResponse> createProduct(@ModelAttribute ProductRequest request) throws IOException {
         return ApiResponse.<ProductResponse>builder()
@@ -37,13 +36,15 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse getProduct(@PathVariable Long id) {
-        return productService.getProductById(id);
+    public ApiResponse<ProductResponse> getProduct(@PathVariable Long id) {
+        return ApiResponse.<ProductResponse>builder()
+                .result(productService.getProductById(id))
+                .build();
     }
 
-
     @PutMapping(path = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ApiResponse<ProductResponse> updateProduct(@PathVariable Long id, @ModelAttribute ProductRequest request) throws IOException {
+    ApiResponse<ProductResponse> updateProduct(@PathVariable Long id, @ModelAttribute ProductRequest request)
+            throws IOException {
         return ApiResponse.<ProductResponse>builder()
                 .result(productService.updateProduct(id, request))
                 .build();

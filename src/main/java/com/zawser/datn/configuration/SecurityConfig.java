@@ -22,7 +22,7 @@ public class SecurityConfig {
         "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
     };
     private final String[] publicGetEndpoints = {
-        "/category", "/products", "/products/**", "/categories/**", "/uploads/**"
+        "/category", "/products", "/products/**", "/uploads/**", "/brand/**"
     };
 
     private final CustomJwtDecoder customJwtDecoder;

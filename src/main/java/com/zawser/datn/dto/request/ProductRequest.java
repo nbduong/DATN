@@ -26,7 +26,26 @@ public class ProductRequest {
     @Positive(message = "Price must be positive")
     Double price;
 
-    List<Long> categories;
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be positive")
+    Integer quantity;
 
+    @NotBlank(message = "Category is required")
+    Long categoryId;
+
+    @NotBlank(message = "Brand is required")
+    Long brandId;
+
+    String productCode;
+
+    String status;
+
+    @Nullable
     List<MultipartFile> images;
+
+    String specificationsJson;
+
+    @Nullable
+    Long viewCount;
+
 }
