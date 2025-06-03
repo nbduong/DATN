@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductResponse {
-    Long id;
+    String id;
     String name;
     String productCode;
     String description;
@@ -24,4 +24,5 @@ public class ProductResponse {
     Map<String, String> specifications;
     String status;
     Long viewCount;
+    Boolean isDeleted;
 }

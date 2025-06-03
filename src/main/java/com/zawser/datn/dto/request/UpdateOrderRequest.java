@@ -11,6 +11,11 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateOrderRequest {
-    private String status;
+    String userName;
+    String status;
+    String shippingAddress;
+    String paymentMethod;
+    String shipmentMethod;
+    String orderNote;
     private List<OrderItemRequest> orderItems;
 }

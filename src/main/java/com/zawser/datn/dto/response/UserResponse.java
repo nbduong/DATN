@@ -24,4 +24,10 @@ public class UserResponse {
 
     Set<RoleResponse> roles;
     String status;
+
+    String createdBy;
+    LocalDate createdDate;
+    String lastModifiedBy;
+    LocalDate lastModifiedDate;
+    Boolean isDeleted;
 }

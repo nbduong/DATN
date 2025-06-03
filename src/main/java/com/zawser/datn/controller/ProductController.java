@@ -36,14 +36,14 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<ProductResponse> getProduct(@PathVariable Long id) {
+    public ApiResponse<ProductResponse> getProduct(@PathVariable String id) {
         return ApiResponse.<ProductResponse>builder()
                 .result(productService.getProductById(id))
                 .build();
     }
 
     @PutMapping(path = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ApiResponse<ProductResponse> updateProduct(@PathVariable Long id, @ModelAttribute ProductRequest request)
+    ApiResponse<ProductResponse> updateProduct(@PathVariable String id, @ModelAttribute ProductRequest request)
             throws IOException {
         return ApiResponse.<ProductResponse>builder()
                 .result(productService.updateProduct(id, request))
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    ApiResponse<Void> delete(@PathVariable Long id) throws IOException {
+    ApiResponse<Void> delete(@PathVariable String id) throws IOException {
         productService.deleteProduct(id);
         return ApiResponse.<Void>builder().build();
     }

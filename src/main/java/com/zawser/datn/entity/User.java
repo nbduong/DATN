@@ -33,4 +33,11 @@ public class User {
     Set<Role> roles;
 
     String status;
+
+    Boolean isDeleted;
+
+    String createdBy;
+    LocalDate createdDate;
+    String lastModifiedBy;
+    LocalDate lastModifiedDate;
 }

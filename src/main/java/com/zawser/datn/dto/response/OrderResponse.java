@@ -12,10 +12,18 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderResponse {
-     Long id;
-     String userId;
-     Double totalAmount;
-     String status;
-     LocalDateTime createdDate;
-     List<OrderItemResponse> orderItems;
+    String id;
+    String userId;
+    String orderNumber;
+    String userName;
+    Double totalAmount;
+    String shippingAddress;
+    String paymentMethod;
+    String shipmentMethod;
+    String orderNote;
+    String status;
+    LocalDateTime createdDate;
+    List<OrderItemResponse> orderItems;
+
+    Boolean isDeleted;
 }

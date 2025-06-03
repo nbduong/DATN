@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -90,6 +91,11 @@ public class ProductService {
                 .collect(Collectors.toList());
         product.setSpecifications(specs);
 
+        product.setCreatedBy("ADMIN");
+        product.setLastModifiedBy("ADMIN");
+        product.setLastModifiedDate(LocalDate.now());
+        product.setCreatedDate(LocalDate.now());
+        product.setViewCount(0L);
         Product savedProduct = productRepository.save(product);
         return productMapper.toProductResponse(savedProduct);
     }
@@ -100,7 +106,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public ProductResponse getProductById(Long id) {
+    public ProductResponse getProductById(String id) {
         Product product = productRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -111,11 +117,11 @@ public class ProductService {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public ProductResponse updateProduct(Long id, ProductRequest request) throws IOException {
+    public ProductResponse updateProduct(String id, ProductRequest request) throws IOException {
 
         log.info("Updating product with id: {}", id);
         // Validate input
-        if (id == null || id <= 0) {
+        if (id == null) {
             throw new IllegalArgumentException("Invalid product ID");
         }
         if (request == null) {
@@ -204,6 +210,11 @@ public class ProductService {
             product.setImages(imagePaths);
         }
 
+        product.setLastModifiedBy("ADMIN");
+        product.setLastModifiedDate(LocalDate.now());
+
+        product.setViewCount(0L);
+        product.setIsDeleted(request.getIsDeleted());
         log.info("Saving updated product with id: {}", id);
         try {
             Product savedProduct = productRepository.save(product);
@@ -216,19 +227,21 @@ public class ProductService {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteProduct(Long id) throws IOException {
+    public void deleteProduct(String id) throws IOException {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
-
-        List<String> imagePaths = product.getImages();
-        if (imagePaths != null) {
-            for (String imagePath : imagePaths) {
-                try {
-                    Files.deleteIfExists(Paths.get(imagePath));
-                } catch (IOException e) {
-                    throw new IOException("Failed to delete image: " + imagePath, e);
-                }
-            }
-        }
-        productRepository.delete(product);
+        product.setIsDeleted(true);
+        product.setViewCount(0L);
+        productRepository.save(product);
+        //        List<String> imagePaths = product.getImages();
+        //        if (imagePaths != null) {
+        //            for (String imagePath : imagePaths) {
+        //                try {
+        //                    Files.deleteIfExists(Paths.get(imagePath));
+        //                } catch (IOException e) {
+        //                    throw new IOException("Failed to delete image: " + imagePath, e);
+        //                }
+        //            }
+        //        }
+        //        productRepository.delete(product);
     }
 }

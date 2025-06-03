@@ -1,7 +1,6 @@
 package com.zawser.datn.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.zawser.datn.dto.request.ApiResponse;
 import com.zawser.datn.dto.request.PlaceOrderRequest;
@@ -26,30 +25,37 @@ public class OrderController {
                 .build();
     }
 
-    @GetMapping("/{id}")
-    public ApiResponse<OrderResponse> getOrderById(@PathVariable Long id) {
+    @GetMapping
+    public ApiResponse<List<OrderResponse>> getOrder() {
+        return ApiResponse.<List<OrderResponse>>builder()
+                .result(orderService.getAll())
+                .build();
+    }
+
+    @GetMapping("/id/{id}") // Changed from "/{id}"
+    public ApiResponse<OrderResponse> getOrderById(@PathVariable String id) {
         return ApiResponse.<OrderResponse>builder()
                 .result(orderService.getOrderById(id))
                 .build();
     }
 
-    @GetMapping
-    public ApiResponse<List<OrderResponse>> getAllOrders(@RequestParam(required = false) String userId) {
+    @GetMapping("/user/{userName}") // Changed from "/{userName}"
+    public ApiResponse<List<OrderResponse>> getAllOrders(@PathVariable String userName) {
         return ApiResponse.<List<OrderResponse>>builder()
-                .result(orderService.getAllOrders(userId))
+                .result(orderService.getOrderByUserName(userName))
                 .build();
     }
 
     @PutMapping("/{id}")
     public ApiResponse<OrderResponse> updateOrder(
-            @PathVariable Long id, @RequestBody UpdateOrderRequest updateOrderRequest) {
+            @PathVariable String id, @RequestBody UpdateOrderRequest updateOrderRequest) {
         return ApiResponse.<OrderResponse>builder()
                 .result(orderService.updateOrder(id, updateOrderRequest))
                 .build();
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<Void> deleteOrder(@PathVariable Long id) {
+    public ApiResponse<Void> deleteOrder(@PathVariable String id) {
         orderService.deleteOrder(id);
         return ApiResponse.<Void>builder().build();
     }

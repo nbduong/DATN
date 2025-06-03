@@ -1,5 +1,6 @@
 package com.zawser.datn.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,8 @@ import lombok.experimental.FieldDefaults;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
 
     @Column(nullable = false)
     String name;
@@ -56,4 +57,11 @@ public class Product {
 
     @Column(columnDefinition = "bigint default 0")
     Long viewCount;
+
+    Boolean isDeleted;
+
+    String createdBy;
+    LocalDate createdDate;
+    String lastModifiedBy;
+    LocalDate lastModifiedDate;
 }

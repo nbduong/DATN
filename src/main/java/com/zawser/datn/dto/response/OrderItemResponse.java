@@ -9,9 +9,9 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItemResponse {
-    private Long id;
-    private Long productId;
-    private String productName;
-    private Integer quantity;
-    private Double price;
+    Long id;
+    String productId;
+    String productName;
+    Integer quantity;
+    Double price;
 }

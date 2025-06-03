@@ -1,5 +1,6 @@
 package com.zawser.datn.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,34 @@ import lombok.experimental.FieldDefaults;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
+
+    @Column(nullable = false)
+    Long orderNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     User user;
 
+    @Column(nullable = false)
+    String userName;
+
+    String orderNote;
+
+    @Column(nullable = false)
     Double totalAmount;
 
+    @Column(nullable = false)
+    String shippingAddress;
+
+    @Column(nullable = false)
+    String paymentMethod;
+
+    @Column(nullable = false)
+    String shipmentMethod;
+
+    @Column(nullable = false)
     String status;
 
     @Builder.Default // Add this annotation
@@ -36,4 +56,10 @@ public class Order {
     @Builder.Default // Add this annotation
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItem> orderItems = new ArrayList<>();
+
+    Boolean isDeleted;
+
+    String createdBy;
+    String lastModifiedBy;
+    LocalDate lastModifiedDate;
 }

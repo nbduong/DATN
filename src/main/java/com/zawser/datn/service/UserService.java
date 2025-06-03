@@ -1,5 +1,6 @@
 package com.zawser.datn.service;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class UserService {
         //        Set role cho user moi
         user.setRoles(new HashSet<>(roleRepository.findAllById(List.of(Role.USER.name()))));
 
+        user.setCreatedBy(request.getUsername());
+        user.setLastModifiedBy(request.getUsername());
+        user.setLastModifiedDate(LocalDate.now());
+        user.setCreatedDate(LocalDate.now());
+        user.setIsDeleted(false);
         user.setStatus("0");
         try {
             user = userRepository.save(user);
@@ -90,13 +96,17 @@ public class UserService {
         if (request.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
-
+        user.setLastModifiedBy(request.getName());
+        user.setLastModifiedDate(LocalDate.now());
         user.setStatus("1");
         return userMapper.toUserResponse(userRepository.save(user));
     }
     //    Xóa user
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(String id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setIsDeleted(true);
+        userRepository.save(user);
+        //        userRepository.deleteById(id);
     }
 }

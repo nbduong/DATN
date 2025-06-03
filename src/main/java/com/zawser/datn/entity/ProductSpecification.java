@@ -14,14 +14,14 @@ import lombok.experimental.FieldDefaults;
 public class ProductSpecification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
-    private String specKey;
-    private String specValue;
+    String specKey;
+    String specValue;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    Product product;
 
     public ProductSpecification(String specKey, String specValue, Product product) {
         this.specKey = specKey;
