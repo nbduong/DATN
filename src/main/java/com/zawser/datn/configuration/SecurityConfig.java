@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final String[] publicPostEndpoints = {
-        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh", "/orders/**",
+        "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh", "/orders/**","/password/**",
     };
     private final String[] publicGetEndpoints = {
         "/category/**", "/products", "/products/**", "/uploads/**", "/brand/**", "/orders/**",

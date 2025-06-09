@@ -1,6 +1,7 @@
 package com.zawser.datn.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -40,4 +41,8 @@ public class User {
     LocalDate createdDate;
     String lastModifiedBy;
     LocalDate lastModifiedDate;
+
+     String resetPasswordToken;
+     LocalDateTime resetPasswordTokenExpiry;
+
 }

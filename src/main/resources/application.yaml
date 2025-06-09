@@ -23,6 +23,19 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nbduong1905@gmail.com
+    password: njjv zyxe owop vjor
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
 jwt:
   signerKey: "xvHC17VnSADr6yBE3aBQy445Yc0n7NrtE4X5oTQhrvnm3aPuYalAjB4h5Facd30P"
   valid-duration: 36000 #second
@@ -32,4 +45,6 @@ logging:
   level:
     org.springframework: DEBUG
     com.your package: DEBUG
+
+
 
