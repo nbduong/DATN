@@ -1,9 +1,12 @@
 package com.zawser.datn.configuration;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.zawser.datn.entity.User;
 import com.zawser.datn.enums.Role;
+import com.zawser.datn.repository.RoleRepository;
 import com.zawser.datn.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,19 +23,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 public class ApplicationInitConfig {
 
-    private PasswordEncoder passwordEncoder;
+     PasswordEncoder passwordEncoder;
+    RoleRepository roleRepository;
 
     @Bean
     ApplicationRunner applicationRunner(UserRepository userRepository) {
         return args -> {
             if (userRepository.findByUsername("admin").isEmpty()) {
-                var roles = new HashSet<String>();
-                roles.add(Role.ADMIN.name());
                 User user = User.builder()
                         .username("admin")
-                        .password(passwordEncoder.encode("admin"))
-                        //                        .roles(roles)
+                        .password(passwordEncoder.encode("Duong19bg!"))
+                        .email("nbduong1905@gmail.com")
                         .build();
+                user.setRoles(new HashSet<>(roleRepository.findAllById(List.of(Role.ADMIN.name()))));
                 userRepository.save(user);
                 log.warn("Admin user created with default password: admin");
             }
