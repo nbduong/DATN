@@ -24,7 +24,7 @@ public class ProductRequest {
 
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be positive")
-    Double price;
+    Double salePrice;
 
     @NotNull(message = "Quantity is required")
     @Positive(message = "Quantity must be positive")
@@ -35,6 +35,8 @@ public class ProductRequest {
 
     @NotBlank(message = "Brand is required")
     Long brandId;
+
+    String discountId;
 
     String productCode;
 

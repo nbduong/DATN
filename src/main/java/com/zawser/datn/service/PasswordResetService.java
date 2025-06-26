@@ -1,5 +1,8 @@
 package com.zawser.datn.service;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import com.zawser.datn.entity.User;
 import com.zawser.datn.exception.AppException;
 import com.zawser.datn.exception.ErrorCode;
@@ -13,9 +16,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -27,8 +27,7 @@ public class PasswordResetService {
     private final JavaMailSender mailSender;
 
     public void requestPasswordReset(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         String token = generateResetToken();
         user.setResetPasswordToken(token);
@@ -39,7 +38,8 @@ public class PasswordResetService {
     }
 
     public void resetPassword(String token, String newPassword) {
-        User user = userRepository.findByResetPasswordToken(token)
+        User user = userRepository
+                .findByResetPasswordToken(token)
                 .orElseThrow(() -> new AppException(ErrorCode.INVALID_KEY_EXCEPTION));
 
         if (user.getResetPasswordTokenExpiry().isBefore(LocalDateTime.now())) {
@@ -60,10 +60,9 @@ public class PasswordResetService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Password Reset Request");
-        message.setText("To reset your password, click the link below:\n\n" +
-                "http://localhost:5173/forgot?token=" + token);
+        message.setText(
+                "To reset your password, click the link below:\n\n" + "http://localhost:5173/forgot?token=" + token);
 
         mailSender.send(message);
     }
-
 }

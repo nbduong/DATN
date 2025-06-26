@@ -70,8 +70,9 @@ public class UserService {
     //    Lấy 1 user theo id
     @PostAuthorize("returnObject.username == authentication.name or hasRole('ADMIN')")
     public UserResponse getUser(String id) {
+
         return userMapper.toUserResponse(
-                userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found")));
+                userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND)));
     }
 
     //    Lay thong tin
@@ -85,7 +86,7 @@ public class UserService {
 
     //    Sửa user
     public UserResponse updateUser(String id, UserUpdateRequest request) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         userMapper.updateUser(user, request);
 
         if (request.getRoles() != null) {

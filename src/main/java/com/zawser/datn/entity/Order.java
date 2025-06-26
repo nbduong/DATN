@@ -1,6 +1,5 @@
 package com.zawser.datn.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +49,12 @@ public class Order {
     @Column(nullable = false)
     String status;
 
-    @Builder.Default // Add this annotation
+    Double totalProfit;
+
+    @Builder.Default
     LocalDateTime createdDate = LocalDateTime.now();
 
-    @Builder.Default // Add this annotation
+    @Builder.Default
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItem> orderItems = new ArrayList<>();
 
@@ -61,5 +62,5 @@ public class Order {
 
     String createdBy;
     String lastModifiedBy;
-    LocalDate lastModifiedDate;
+    LocalDateTime lastModifiedDate;
 }

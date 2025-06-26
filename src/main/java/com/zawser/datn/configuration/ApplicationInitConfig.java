@@ -2,7 +2,6 @@ package com.zawser.datn.configuration;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.zawser.datn.entity.User;
 import com.zawser.datn.enums.Role;
@@ -23,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 public class ApplicationInitConfig {
 
-     PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
     RoleRepository roleRepository;
 
     @Bean

@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-
 @Builder
 @Data
 @NoArgsConstructor
@@ -16,5 +15,4 @@ public class ForgotPasswordRequest {
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Please provide a valid email")
     String email;
-
 }

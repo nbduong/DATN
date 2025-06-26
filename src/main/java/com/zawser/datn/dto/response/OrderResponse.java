@@ -14,16 +14,19 @@ import lombok.experimental.FieldDefaults;
 public class OrderResponse {
     String id;
     String userId;
-    String orderNumber;
     String userName;
-    Double totalAmount;
+    String orderNumber;
+    String status;
     String shippingAddress;
     String paymentMethod;
+    Double totalAmount;
+    Double totalProfit;
     String shipmentMethod;
     String orderNote;
-    String status;
-    LocalDateTime createdDate;
     List<OrderItemResponse> orderItems;
-
+    String createdBy;
+    LocalDateTime createdDate;
+    String lastModifiedBy;
+    LocalDateTime lastModifiedDate;
     Boolean isDeleted;
 }

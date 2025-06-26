@@ -7,6 +7,7 @@ import com.zawser.datn.dto.request.PlaceOrderRequest;
 import com.zawser.datn.dto.request.UpdateOrderRequest;
 import com.zawser.datn.dto.response.OrderResponse;
 import com.zawser.datn.service.OrderService;
+import jakarta.mail.MessagingException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +20,8 @@ public class OrderController {
     }
 
     @PostMapping("/place")
-    public ApiResponse<OrderResponse> placeOrder(@RequestBody PlaceOrderRequest placeOrderDto) {
+    public ApiResponse<OrderResponse> placeOrder(@RequestBody PlaceOrderRequest placeOrderDto)
+            throws MessagingException {
         return ApiResponse.<OrderResponse>builder()
                 .result(orderService.placeOrder(placeOrderDto))
                 .build();
@@ -48,7 +50,7 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public ApiResponse<OrderResponse> updateOrder(
-            @PathVariable String id, @RequestBody UpdateOrderRequest updateOrderRequest) {
+            @PathVariable String id, @RequestBody UpdateOrderRequest updateOrderRequest) throws MessagingException {
         return ApiResponse.<OrderResponse>builder()
                 .result(orderService.updateOrder(id, updateOrderRequest))
                 .build();

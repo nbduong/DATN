@@ -26,6 +26,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     String email;
+
     String name;
     String phone;
     String address;
@@ -44,7 +45,6 @@ public class User {
     String lastModifiedBy;
     LocalDate lastModifiedDate;
 
-     String resetPasswordToken;
-     LocalDateTime resetPasswordTokenExpiry;
-
+    String resetPasswordToken;
+    LocalDateTime resetPasswordTokenExpiry;
 }

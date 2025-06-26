@@ -26,5 +26,7 @@ public class OrderItem {
     Product product;
 
     Integer quantity;
-    Double price;
+    Double salePrice;
+    Double unitPrice;
+    Double profit;
 }

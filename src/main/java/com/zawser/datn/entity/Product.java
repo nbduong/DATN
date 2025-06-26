@@ -1,6 +1,6 @@
 package com.zawser.datn.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +31,15 @@ public class Product {
     String description;
 
     @Column(nullable = false)
-    Double price;
-
-    @Column(nullable = false)
     Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "discount_id")
+    Discount discount;
 
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
@@ -52,6 +53,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductSpecification> specifications;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<ProductPrice> prices = new ArrayList<>();
+
     @Column(nullable = false)
     String status;
 
@@ -61,7 +65,7 @@ public class Product {
     Boolean isDeleted;
 
     String createdBy;
-    LocalDate createdDate;
+    LocalDateTime createdDate;
     String lastModifiedBy;
-    LocalDate lastModifiedDate;
+    LocalDateTime lastModifiedDate;
 }
