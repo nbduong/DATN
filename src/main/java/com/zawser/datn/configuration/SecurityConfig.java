@@ -29,7 +29,14 @@ public class SecurityConfig {
         "/stock-in/**"
     };
     private final String[] publicGetEndpoints = {
-        "/category/**", "/products", "/products/**", "/uploads/**", "/brand/**", "/orders/**", "/stock-in/**"
+        "/category/**",
+            "/products",
+            "/products/**",
+            "/uploads/**",
+            "/brand/**",
+            "/orders/**",
+            "/stock-in/**",
+            "/comment/**",
     };
 
     private final CustomJwtDecoder customJwtDecoder;

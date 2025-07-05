@@ -82,17 +82,35 @@ public class DiscountService {
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public DiscountResponse updateDiscount(String id, DiscountRequest request) {
-        validateDiscountRequest(request);
+//        validateDiscountRequest(request);
 
-        Discount discount =
-                discountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Discount not found"));
+        Discount discount = discountRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Discount not found"));
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        // Kiểm tra xem startDate đã qua chưa
+        boolean isStartDatePassed = discount.getStartDate() != null && discount.getStartDate().isBefore(LocalDateTime.now());
+
+        // Ánh xạ các trường từ request
         discountMapper.updateDiscount(discount, request);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         discount.setLastModifiedBy(username);
         discount.setLastModifiedDate(LocalDateTime.now());
-        discount.setIsGlobal(request.getIsGlobal() != null && request.getIsGlobal());
-        return discountMapper.toDiscountResponse(discountRepository.save(discount));
+        discount.setIsGlobal(request.getIsGlobal() != null ? request.getIsGlobal() : false);
+
+        // Chỉ cập nhật startDate nếu nó được cung cấp và ngày bắt đầu chưa qua
+        if (!isStartDatePassed && request.getStartDate() != null) {
+            try {
+                discount.setStartDate(LocalDateTime.parse(request.getStartDate().toString()));
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException("Invalid date format. Use ISO format (yyyy-MM-ddTHH:mm:ss)");
+            }
+        }
+
+        // Lưu entity
+        Discount updatedDiscount = discountRepository.save(discount);
+
+        // Chuyển đổi sang DiscountResponse
+        return discountMapper.toDiscountResponse(updatedDiscount);
     }
 
     public DiscountResponse getDiscountById(String id) {

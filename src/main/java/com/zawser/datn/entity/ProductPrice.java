@@ -29,7 +29,7 @@ public class ProductPrice {
     Double salePrice;
 
     @Column(nullable = false)
-    LocalDate startDate;
+    LocalDateTime startDate;
 
     @Column
     LocalDateTime endDate; // Có thể null nếu giá vẫn đang áp dụng

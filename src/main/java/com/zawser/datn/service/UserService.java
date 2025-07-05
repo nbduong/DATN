@@ -61,14 +61,14 @@ public class UserService {
 
     //    Lấy tất cả user
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER_MANAGER')")
     public List<UserResponse> getUsers() {
         log.info("Getting users");
         return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
     }
 
     //    Lấy 1 user theo id
-    @PostAuthorize("returnObject.username == authentication.name or hasRole('ADMIN')")
+    @PostAuthorize("returnObject.username == authentication.name or hasRole('ADMIN') or hasRole('USER_MANAGER')")
     public UserResponse getUser(String id) {
 
         return userMapper.toUserResponse(
@@ -76,6 +76,7 @@ public class UserService {
     }
 
     //    Lay thong tin
+    @PreAuthorize("hasRole('USER') or hasRole('USER_MANAGER') or hasRole('ADMIN')")
     public UserResponse getMyInfo() {
         var context = SecurityContextHolder.getContext();
         String Name = context.getAuthentication().getName();
@@ -85,6 +86,7 @@ public class UserService {
     }
 
     //    Sửa user
+    @PreAuthorize("hasRole('USER') or hasRole('USER_MANAGER') or hasRole('ADMIN')")
     public UserResponse updateUser(String id, UserUpdateRequest request) {
         User user = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         userMapper.updateUser(user, request);
@@ -103,7 +105,7 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
     //    Xóa user
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER_MANAGER')")
     public void deleteUser(String id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setIsDeleted(true);

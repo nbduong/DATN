@@ -31,7 +31,7 @@ public class StockInService {
     StockInMapper stockInMapper;
     ProductRepository productRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STORAGE_MANAGER')")
     @Transactional
     public StockInResponse createStockIn(StockInRequest request) {
 
@@ -54,21 +54,21 @@ public class StockInService {
         return stockInMapper.toStockInResponse(savedStockIn);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STORAGE_MANAGER')")
     public List<StockInResponse> getAllStockIns() {
         return stockInRepository.findAll().stream()
                 .map(stockInMapper::toStockInResponse)
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STORAGE_MANAGER')")
     public List<StockInResponse> getAvailableStockIns(String productId) {
         return stockInRepository.findByProductIdAndRemainingQuantityGreaterThanOrderByInDateAsc(productId, 0).stream()
                 .map(stockInMapper::toStockInResponse)
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STORAGE_MANAGER')")
     @Transactional
     public StockInResponse updateStockIn(String id, StockInUpdateRequest request) {
         var context = SecurityContextHolder.getContext();
@@ -119,7 +119,7 @@ public class StockInService {
         return stockInMapper.toStockInResponse(savedStockIn);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STORAGE_MANAGER')")
     @Transactional
     public void deleteStockIn(String id) {
         StockIn stockIn = stockInRepository

@@ -151,7 +151,7 @@ public class OrderService {
         content.append(
                 "<div style='background-color: #3b82f6; color: white; text-align: center; padding: 20px; border-radius: 8px 0px 8px 0px;'>");
         content.append(
-                "<img src='https://via.placeholder.com/150x50.png?text=Your+Logo' alt='Logo Công Ty' style='max-width: 150px; height: auto;'>");
+                "<img src='https://i.postimg.cc/85W1ZLTm/logo.png' alt='Logo Công Ty' style='max-width: 150px; height: auto;'>");
         content.append("<h2 style='margin: 10px 0; font-size: 24px;'>Xác Nhận Đơn Hàng</h2>");
         content.append("</div>");
         content.append(
@@ -194,17 +194,15 @@ public class OrderService {
             content.append("<td style='padding: 12px; border-bottom: 1px solid #ddd;'>₫")
                     .append(String.format("%,.0f", item.getSalePrice()))
                     .append("</td>");
-            content.append("</tr>");
+            content.append("<td style='padding: 12px; border-bottom: 1px solid #ddd;'>₫")
+                    .append(String.format("%,.0f", item.getSalePrice() * item.getQuantity()))
+                    .append("</td>");
         }
         content.append("</tbody>");
         content.append("</table>");
         content.append("</div>");
         content.append("<p style='font-size: 16px; font-weight: bold; margin: 10px 0; text-align: right;'>Tổng tiền: ₫")
                 .append(String.format("%,.0f", order.getTotalAmount()))
-                .append("</p>");
-        content.append(
-                        "<p style='font-size: 16px; font-weight: bold; margin: 10px 0; text-align: right;'>Tổng lợi nhuận: ₫")
-                .append(String.format("%,.0f", order.getTotalProfit()))
                 .append("</p>");
         content.append("<p style='text-align: center;'>");
         content.append(
@@ -373,7 +371,7 @@ public class OrderService {
         content.append(
                 "<div style='background-color: #3b82f6; color: white; text-align: center; padding: 20px; border-radius: 8px 0px 8px 0px;'>");
         content.append(
-                "<img src='https://via.placeholder.com/150x50.png?text=Your+Logo' alt='Logo Công Ty' style='max-width: 150px; height: auto;'>");
+                "<img src='https://i.postimg.cc/85W1ZLTm/logo.png' alt='Logo Công Ty' style='max-width: 150px; height: auto;'>");
         content.append("<h2 style='margin: 10px 0; font-size: 24px;'>Đơn Hàng Đã Giao Thành Công</h2>");
         content.append("</div>");
         content.append(
@@ -394,7 +392,7 @@ public class OrderService {
         content.append("<th style='padding: 12px; border-bottom: 1px solid #ddd;'>Sản phẩm</th>");
         content.append("<th style='padding: 12px; border-bottom: 1px solid #ddd;'>Số lượng</th>");
         content.append("<th style='padding: 12px; border-bottom: 1px solid #ddd;'>Giá bán</th>");
-        content.append("<th style='padding: 12px; border-bottom: 1px solid #ddd;'>Tổng</th>");
+        content.append("<th style='padding: 12px; border-bottom: 1px solid #ddd;'>Tổng tiền</th>");
         content.append("</tr>");
         content.append("</thead>");
         content.append("<tbody>");
@@ -406,8 +404,11 @@ public class OrderService {
             content.append("<td style='padding: 12px; border-bottom: 1px solid #ddd; text-align: center;'>")
                     .append(item.getQuantity())
                     .append("</td>");
+            content.append("<td style='padding: 12px; border-bottom: 1px solid #ddd; text-align: center;'>")
+                    .append(item.getSalePrice())
+                    .append("</td>");
             content.append("<td style='padding: 12px; border-bottom: 1px solid #ddd;'>₫")
-                    .append(String.format("%,.0f", item.getSalePrice()))
+                    .append(String.format("%,.0f", item.getSalePrice() * item.getQuantity()))
                     .append("</td>");
             content.append("</tr>");
         }
@@ -416,10 +417,6 @@ public class OrderService {
         content.append("</div>");
         content.append("<p style='font-size: 16px; font-weight: bold; margin: 10px 0; text-align: right;'>Tổng tiền: ₫")
                 .append(String.format("%,.0f", order.getTotalAmount()))
-                .append("</p>");
-        content.append(
-                        "<p style='font-size: 16px; font-weight: bold; margin: 10px 0; text-align: right;'>Tổng lợi nhuận: ₫")
-                .append(String.format("%,.0f", order.getTotalProfit()))
                 .append("</p>");
         content.append("<p style='text-align: center;'>");
         content.append(

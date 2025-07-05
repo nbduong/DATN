@@ -8,10 +8,12 @@ import com.zawser.datn.entity.Discount;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(
         componentModel = "spring",
-        imports = {LocalDateTime.class})
+        imports = {LocalDateTime.class},
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface DiscountMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -38,7 +40,7 @@ public interface DiscountMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
-    @Mapping(target = "startDate", expression = "java(LocalDateTime.parse(request.getStartDate()))")
+    @Mapping(target = "startDate", ignore = true)
     @Mapping(target = "endDate", expression = "java(LocalDateTime.parse(request.getEndDate()))")
     @Mapping(target = "status", defaultValue = "ACTIVE")
     void updateDiscount(@MappingTarget Discount discount, DiscountRequest request);

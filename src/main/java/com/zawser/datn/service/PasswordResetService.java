@@ -61,7 +61,7 @@ public class PasswordResetService {
         message.setTo(email);
         message.setSubject("Password Reset Request");
         message.setText(
-                "To reset your password, click the link below:\n\n" + "http://localhost:5173/forgot?token=" + token);
+                "Để có thể đặt lại mật khẩu của bạn, hãy ấn vào link sau:\n\n" + "http://localhost:5173/forgot?token=" + token);
 
         mailSender.send(message);
     }

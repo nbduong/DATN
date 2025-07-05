@@ -48,7 +48,7 @@ public class AuthenticationService {
     protected String signerKey;
 
     @NonFinal
-    @Value("${jwt.valid-duration}0")
+    @Value("${jwt.valid-duration}")
     protected long validDuration;
 
     @NonFinal
