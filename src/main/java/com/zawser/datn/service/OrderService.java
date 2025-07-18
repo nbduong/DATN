@@ -44,7 +44,7 @@ public class OrderService {
     EmailService emailService;
     ProductService productService;
 
-    @PreAuthorize("#userName == authentication.name or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @Transactional
     public OrderResponse placeOrder(PlaceOrderRequest placeOrder) throws MessagingException {
         User user = userRepository
