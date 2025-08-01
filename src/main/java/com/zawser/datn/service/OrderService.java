@@ -420,7 +420,7 @@ public class OrderService {
                 .append("</p>");
         content.append("<p style='text-align: center;'>");
         content.append(
-                "<a href='http://yourdomain.com/reviews' style='display: inline-block; padding: 10px 20px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 5px; font-size: 14px;'>Đánh Giá Sản Phẩm</a>");
+                "<a href='#' style='display: inline-block; padding: 10px 20px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 5px; font-size: 14px;'>Đánh Giá Sản Phẩm</a>");
         content.append("</p>");
         content.append(
                 "<p style='font-size: 14px;'>Chúng tôi mong nhận được ý kiến đánh giá của Quý khách về sản phẩm và dịch vụ. Nếu có bất kỳ câu hỏi hoặc cần hỗ trợ, vui lòng liên hệ qua <a href='mailto:support@yourcompany.com' style='color: #3b82f6;'>support@yourcompany.com</a>.</p>");
